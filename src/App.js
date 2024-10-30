@@ -3,11 +3,12 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './components/Home';
 import Contact from './components/Contact';
+import './App.css'; // Importiere die App.css hier
 
 function App() {
   return (
     <Router>
-      <div>
+      <div className="App"> {/* Füge hier die Klasse "App" hinzu */}
         <nav>
           <ul>
             <li>

@@ -2,54 +2,50 @@
 import React, { useState } from 'react';
 
 function Contact() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Hier kannst du den Code hinzufügen, um die Formulardaten zu verarbeiten
-    alert(`Nachricht gesendet:\nName: ${name}\nE-Mail: ${email}\nNachricht: ${message}`);
-    
-    // Formular zurücksetzen
-    setName('');
-    setEmail('');
-    setMessage('');
+    // Hier kannst du das Formular absenden
+    console.log('Form submitted:', formData);
   };
 
   return (
-    <div>
+    <div className="contact-form">
       <h1>Kontakt</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="email">E-Mail:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="message">Nachricht:</label>
-          <textarea
-            id="message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            required
-          />
-        </div>
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="E-Mail"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+        <textarea
+          name="message"
+          placeholder="Nachricht"
+          value={formData.message}
+          onChange={handleChange}
+          required
+        ></textarea>
         <button type="submit">Absenden</button>
       </form>
     </div>
