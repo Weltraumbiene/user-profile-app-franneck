@@ -1,27 +1,28 @@
-import './App.css';
+// src/App.js
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { Route } from 'react-router-dom';
-import { Routes } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import Home from './components/Home';
-import Contact from './components/Contact';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+
+function Home() {
+  return <h1>Willkommen auf der Startseite!</h1>;
+}
+
+function Contact() {
+  return <h1>Kontaktseite</h1>;
+}
 
 function App() {
-    return (
-        <BrowserRouter>
-            <nav>
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/contact">Contact</Link></li>
-                </ul>
-            </nav>
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/contact" element={<Contact />} />
-            </Routes>
-        </BrowserRouter>
-    );
+  return (
+    <Router>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/contact">Contact</Link>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
