@@ -4,7 +4,7 @@ import React from 'react';
 function Login() {
 
   const handleSubmit = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     const username = e.target.elements.username.value;
     const password = e.target.elements.password.value;
     console.log(username)
