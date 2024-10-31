@@ -74,3 +74,8 @@
 .contact-form button:hover {
   background-color: #61dafb; /* Wechseln zu einem blauen Farbton */
 }
+
+.navbar-nav {
+  list-style-type: none;
+  padding-left: 0;
+}

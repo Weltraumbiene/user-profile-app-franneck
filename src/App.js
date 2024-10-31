@@ -1,31 +1,27 @@
 // src/App.js
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstrap laden
+
+import { Routes, Route } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
+
 import Home from './components/Home';
 import Contact from './components/Contact';
-import './App.css'; // Importiere die App.css hier
+import Navigation from './components/Navigation';
+import Login from './components/Login';
 
 function App() {
   return (
-    <Router>
-      <div className="App"> {/* Füge hier die Klasse "App" hinzu */}
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/contact">Kontakt</Link>
-            </li>
-          </ul>
-        </nav>
-
+    <div className="App">
+      <Navigation />
+      <Container className="mt-4">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
-      </div>
-    </Router>
+      </Container>
+    </div>
   );
 }
 
