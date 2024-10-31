@@ -9,7 +9,7 @@ const PORT = 4000;
 app.use(cors()); // Erlaubt Anfragen von anderen Servern (z.B. React-Frontend)
 app.use(express.json()); // Erlaubt das Verarbeiten von JSON-Anfragen
 
-// MariaDB-Verbindung einrichten
+
 const pool = mariadb.createPool({
     host: 'localhost', // Hostname
     user: 'ben', // deinen DB-Benutzernamen hier eingeben
