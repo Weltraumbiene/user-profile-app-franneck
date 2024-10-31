@@ -23,15 +23,31 @@ function Login() {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const username = e.target.elements.username.value;
         const password = e.target.elements.password.value;
-        setIsLoggedIn(true);
-        setMessage('Sie haben sich erfolgreich eingeloggt.');
-        console.log(username)
-        console.log(password)
-        e.target.reset(); // Formular zurücksetzen
+        try {
+          const response = await fetch(`http://server-comhard/api/login`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username: username, password: password }),
+          });
+          const data = await response.json();
+
+          if (response.ok) {
+            localStorage.setItem('token', data.token); // Speichert das Token
+            localStorage.setItem('userId', data.userId);  // userId speichern
+            setMessage('Erfolgreich eingeloggt!');
+          } else {
+            setMessage(data.message || 'Login fehlgeschlagen');
+          }
+        } catch (error) {
+          console.error("Fehler beim Login:", error);
+          setMessage("Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.");
+        }
     };
 
     return (
