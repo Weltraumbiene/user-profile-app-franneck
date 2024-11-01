@@ -25,7 +25,7 @@ function App() {
 
       <Container className="mt-4">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
         </Routes>
