@@ -8,14 +8,20 @@ import Home from './components/Home';
 import Contact from './components/Contact';
 import Navigation from './components/Navigation';
 import Login from './components/Login';
+import FakeToggleLoginButton from './components/FakeToggleLoginButton';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const handleToggleLogin = () => {
+    setIsLoggedIn(!isLoggedIn);
+  };
+
   return (
     <div className="App">
 
-      <Navigation />
+      <Navigation isLoggedIn={isLoggedIn} />
+      <FakeToggleLoginButton isLoggedIn={isLoggedIn} onToggle={handleToggleLogin} />
 
       <Container className="mt-4">
         <Routes>
