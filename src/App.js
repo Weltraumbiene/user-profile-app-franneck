@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import './App.css';
 
 import { Routes, Route } from 'react-router-dom';
@@ -9,6 +10,8 @@ import Navigation from './components/Navigation';
 import Login from './components/Login';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
     <div className="App">
 
@@ -18,7 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
         </Routes>
       </Container>
 

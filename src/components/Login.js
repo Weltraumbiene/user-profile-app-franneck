@@ -10,8 +10,7 @@ function ToggleButton({ isLoggedIn, onToggle }) {
     );
 }
 
-function Login() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+function Login({isLoggedIn, setIsLoggedIn}) {
     const [message, setMessage] = useState('');
 
     const handleToggleLogin = () => {
