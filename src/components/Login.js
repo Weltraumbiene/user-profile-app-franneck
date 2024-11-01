@@ -9,7 +9,7 @@ function Login({isLoggedIn, setIsLoggedIn}) {
         const username = e.target.elements.username.value;
         const password = e.target.elements.password.value;
         try {
-          const response = await fetch(`http://server-comhard/api/login`, {
+          const response = await fetch(`http://server-comhard:3001/api/login`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -35,6 +35,8 @@ function Login({isLoggedIn, setIsLoggedIn}) {
         <div>
             <h3>{isLoggedIn ? 'Herzlich willkommen' : 'Bitte einloggen'}</h3>
             {message && <h4>{message}</h4>}
+            {isLoggedIn ?
+            '' :
             <form onSubmit={handleSubmit}>
                 Benutzername: <input type="text" name="username" required />
                 <br />
@@ -42,6 +44,7 @@ function Login({isLoggedIn, setIsLoggedIn}) {
                 <br />
             <button type="submit">Anmelden</button>
             </form>
+            }
         </div>
     );
 }
