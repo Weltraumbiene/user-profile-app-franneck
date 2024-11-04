@@ -5,7 +5,7 @@ import { Container, Navbar, Nav, Image } from 'react-bootstrap';
 
 
 const Navigation = ({isLoggedIn}) => {
-    return <Navbar bg="light" variant="dark" expand="lg">
+    return <Navbar bg="dark" variant="light" expand="lg" className='nav'>
     <Container>
       <Navbar.Brand as={Link} to="/"><Image src={logo} width="50" /></Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />

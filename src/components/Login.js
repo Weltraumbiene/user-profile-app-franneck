@@ -1,15 +1,18 @@
 // src/components/Login.js
 import React, { useState } from 'react';
+import { Form, Button, Alert, Row, Col, Card } from 'react-bootstrap';
 
 function Login({isLoggedIn, setIsLoggedIn}) {
     const [message, setMessage] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const username = e.target.elements.username.value;
         const password = e.target.elements.password.value;
         try {
-          const response = await fetch(`http://server-comhard:3001/api/login`, {
+          const response = await fetch(`http://server-home:3001/api/login`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -32,20 +35,46 @@ function Login({isLoggedIn, setIsLoggedIn}) {
     };
 
     return (
-        <div>
-            <h3>{isLoggedIn ? 'Herzlich willkommen' : 'Bitte einloggen'}</h3>
-            {message && <h4>{message}</h4>}
-            {isLoggedIn ?
-            '' :
-            <form onSubmit={handleSubmit}>
-                Benutzername: <input type="text" name="username" required />
-                <br />
-                Passwort: <input type="password" name="password" required />
-                <br />
-            <button type="submit">Anmelden</button>
-            </form>
-            }
-        </div>
+      <Row className="justify-content-center">
+        <Col md={8} lg={6}>
+        <Card className="text-center shadow-sm">
+            <Card.Body>
+            <Card.Title>Anmelden</Card.Title>
+
+            {message && <Alert variant={isLoggedIn ? "success" : "danger"}>{message}</Alert>}
+
+            <Form onSubmit={handleSubmit}>
+                <Form.Group controlId="username" className="mb-3">
+                <Form.Label>Benutzername</Form.Label>
+                <Form.Control
+                    type="text"
+                    placeholder="Benutzername eingeben"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                />
+                </Form.Group>
+
+                <Form.Group controlId="password" className="mb-3">
+                <Form.Label>Passwort</Form.Label>
+                <Form.Control
+                    type="password"
+                    placeholder="Passwort eingeben"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
+                </Form.Group>
+
+                <Button variant="primary" type="submit" className="w-100">
+                Anmelden
+                </Button>
+            </Form>
+
+            </Card.Body>
+            </Card>
+            </Col>
+        </Row>
     );
 }
 
