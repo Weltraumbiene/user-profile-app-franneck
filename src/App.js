@@ -12,6 +12,7 @@ import FakeToggleLoginButton from './components/FakeToggleLoginButton';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setUserId] = useState(null);
 
   const handleToggleLogin = () => {
     setIsLoggedIn(!isLoggedIn);
@@ -20,12 +21,12 @@ function App() {
   return (
     <div className="App">
 
-      <Navigation isLoggedIn={isLoggedIn} />
+      <Navigation isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
       <FakeToggleLoginButton isLoggedIn={isLoggedIn} onToggle={handleToggleLogin} />
 
       <Container className="mt-4">
         <Routes>
-          <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
+          <Route path="/" element={<Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
         </Routes>

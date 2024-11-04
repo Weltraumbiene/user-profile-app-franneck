@@ -1,18 +1,20 @@
 // src/components/Login.js
 import React, { useState } from 'react';
 import { Form, Button, Alert, Row, Col, Card } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 function Login({isLoggedIn, setIsLoggedIn}) {
     const [message, setMessage] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const username = e.target.elements.username.value;
         const password = e.target.elements.password.value;
         try {
-          const response = await fetch(`http://server-home:3001/api/login`, {
+          const response = await fetch(`http://server-comhard:3001/api/login`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -24,7 +26,11 @@ function Login({isLoggedIn, setIsLoggedIn}) {
           if (response.ok) {
             localStorage.setItem('token', data.token); // Speichert das Token
             localStorage.setItem('userId', data.userId);  // userId speichern
-            setMessage('Erfolgreich eingeloggt!');
+            setMessage('Erfolgreich eingeloggt! Sie werden zur Startseite weitergeleitet.');
+            setIsLoggedIn(true);
+            setTimeout(() => {
+                navigate('/');
+            }, 4000);
           } else {
             setMessage(data.message || 'Login fehlgeschlagen');
           }
