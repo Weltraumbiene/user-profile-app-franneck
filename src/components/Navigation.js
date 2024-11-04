@@ -13,7 +13,10 @@ const Navigation = ({isLoggedIn, handleLogout}) => {
         <Nav.Link as={Link} to="/">Home</Nav.Link>
         <Nav.Link as={Link} to="/contact">Kontakt</Nav.Link>
         {isLoggedIn ?
-          <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+          <>
+            <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
+            <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+          </>
           :
           <Nav.Link as={Link} to="/login">Login</Nav.Link>
         }
