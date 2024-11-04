@@ -12,6 +12,34 @@ function UserProfile({ userId }) {
         setFormData((prevData) => ({ ...prevData, [name]: value }));
     };
 
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        const fetchProfile = async () => {
+            try {
+                const response = await fetch(`http://server-comhard:3001/api/profile`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    setFormData({
+                        name: data.name || '',
+                        bio: data.bio || '',
+                    });
+                } else {
+                    setMessage(data.error || 'Fehler beim Laden des Profils');
+                }
+            } catch (error) {
+                console.log(error);
+                setMessage('Fehler beim Abrufen des Profils');
+            }
+        };
+        // Call async method.
+        fetchProfile();
+    }, [userId]);
 
     const handleSaveProfile = async (e) => {
         e.preventDefault();
