@@ -44,8 +44,26 @@ function UserProfile({ userId }) {
 
     const handleSaveProfile = async (e) => {
         e.preventDefault();
-        console.log('handleSaveProfile');
-    };
+        const token = localStorage.getItem('token');
+        try {
+            const response = await fetch(`${process.env.REACT_APP_API_SERVER_URL}/api/profile`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await response.json();
+            setMessage(response.ok ? 'Profil erfolgreich aktualisiert' : data.error);
+        } catch (error) {
+        console.log(error);
+
+            setMessage('Fehler beim Speichern des Profils');
+        }
+  };
+
 
     return (
         <div>
