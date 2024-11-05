@@ -4,6 +4,7 @@ function UserProfile({ userId }) {
     const [formData, setFormData] = useState({
         name: '',
         bio: '',
+        birthdate: '',
     });
     const [message, setMessage] = useState('');
 
@@ -14,7 +15,7 @@ function UserProfile({ userId }) {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        console.log(process.env.REACT_APP_API_SERVER_URL);
+
         const fetchProfile = async () => {
             try {
                 const response = await fetch(`${process.env.REACT_APP_API_SERVER_URL}/api/profile`, {
@@ -29,6 +30,7 @@ function UserProfile({ userId }) {
                     setFormData({
                         name: data.name || '',
                         bio: data.bio || '',
+                        birthdate: data.birthdate || '',
                     });
                 } else {
                     setMessage(data.error || 'Fehler beim Laden des Profils');
@@ -93,6 +95,18 @@ function UserProfile({ userId }) {
               rows="3"
             />
           </label>
+          <div>
+          <label>
+            Geburtsdatum:
+            <input
+              type="date"
+              name="birthdate"
+              value={formData.birthdate ? new Date(formData.birthdate).toISOString().split('T')[0] : ''}
+              onChange={handleInputChange}
+              rows="3"
+            />
+          </label>
+          </div>
         </div>
 
         <button type="submit">Profil speichern</button>

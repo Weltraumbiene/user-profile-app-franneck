@@ -33,6 +33,7 @@ $ npm build
 
 ### v0.1.0 (Unreleased)
 
+* Add birthdate to profile.
 * Add saving of profile.
 * Use api server url as environment variable.
 * Add getting the profile data for user profile component.
