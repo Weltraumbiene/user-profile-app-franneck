@@ -14,9 +14,10 @@ function UserProfile({ userId }) {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
+        console.log(process.env.REACT_APP_API_SERVER_URL);
         const fetchProfile = async () => {
             try {
-                const response = await fetch(`http://server-comhard:3001/api/profile`, {
+                const response = await fetch(`${process.env.REACT_APP_API_SERVER_URL}/api/profile`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
