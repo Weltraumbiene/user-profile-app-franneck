@@ -1,4 +1,65 @@
-# Getting Started with Create React App
+# user-profile-app-scheidhuber
+
+React example app to handle user profiles.
+
+## Installation
+
+Install all dependencies:
+
+```bash
+$ npm install
+```
+
+Edit the `.env` file:
+
+```bash
+# User-API server
+REACT_APP_API_SERVER_URL="http://your-server-url:3001"
+```
+
+Start the project in the development mode:
+
+```bash
+$ npm start
+```
+
+Create a production version of the project:
+
+```bash
+$ npm build
+```
+
+## Changelog
+
+### v0.1.0 (Unreleased)
+
+* Add saving of profile.
+* Use api server url as environment variable.
+* Add getting the profile data for user profile component.
+* Add menu point for Profile.
+* Add component UserProfile.
+* Add login and logout handling to App component.
+* Add login handling.
+* Adding some react bootstrap sugar to the components.
+* latest change
+* Slightly adjust Login component.
+* Reuse login state in Home component.
+* Move toggle login button to own component and reuse login state in navigation.
+* Uplift state for login from Login to App component.
+* Implement fetch for login.
+* Add subcomponent to toggle login state.
+* Add reactive variables to Login.
+* Fix default form handling prevention.
+* Add component for Login.
+* Move navigation into own component.
+* Add bootstrap-react example.
+* Add bootstrap and basic routing to project.
+* Initialize project using Create React App
+
+
+## Original Readme from boilerplate App...
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
