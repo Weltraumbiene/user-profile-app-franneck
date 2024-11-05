@@ -1,4 +1,4 @@
-# user-profile-app-scheidhuber
+# user-profile-app-franneck
 
 React example app to handle user profiles.
 
