@@ -1,12 +1,12 @@
 {
-  "name": "user-api-franneck",
+  "name": "user-api-scheidhuber",
   "version": "0.1.0",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -21,11 +21,6 @@
     "mariadb": "^3.4.0"
   },
   "devDependencies": {
-    "jest": "^29.7.0",
-    "nodemon": "^3.1.7",
-    "supertest": "^7.0.0"
-  },
-  "jest": {
-    "transform": {}
+    "nodemon": "^3.1.7"
   }
 }

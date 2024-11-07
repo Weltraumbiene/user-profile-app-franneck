@@ -1,85 +1,50 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
-function UserProfile({ userId }) {
-    const [formData, setFormData] = useState({
-        name: '',
-        bio: '',
-    });
-    const [message, setMessage] = useState('');
+function UserProfile() {
+  const [profiles, setProfiles] = useState([]);
+  const [message, setMessage] = useState('');
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prevData) => ({ ...prevData, [name]: value }));
+  useEffect(() => {
+    const fetchProfiles = async () => {
+      const token = localStorage.getItem('token'); // Token aus dem Local Storage abrufen
+      try {
+        const response = await fetch(`${process.env.REACT_APP_API_SERVER_URL}/api/profiles`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+        const data = await response.json();
+        if (response.ok) {
+          setProfiles(data); // Setze die empfangenen Profile
+        } else {
+          setMessage(data.error || 'Fehler beim Laden der Profile');
+        }
+      } catch (error) {
+        console.error(error);
+        setMessage('Fehler beim Abrufen der Profile');
+      }
     };
 
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        const fetchProfile = async () => {
-            try {
-                const response = await fetch(`http://server-comhard:3001/api/profile`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-                });
-                const data = await response.json();
-                if (response.ok) {
-                    setFormData({
-                        name: data.name || '',
-                        bio: data.bio || '',
-                    });
-                } else {
-                    setMessage(data.error || 'Fehler beim Laden des Profils');
-                }
-            } catch (error) {
-                console.log(error);
-                setMessage('Fehler beim Abrufen des Profils');
-            }
-        };
-        // Call async method.
-        fetchProfile();
-    }, [userId]);
+    fetchProfiles();
+  }, []);
 
-    const handleSaveProfile = async (e) => {
-        e.preventDefault();
-        console.log('handleSaveProfile');
-    };
-
-    return (
-        <div>
-        <h3>Profil bearbeiten</h3>
-        {message && <p>{message}</p>}
-
-        <form onSubmit={handleSaveProfile}>
-          <div>
-            <label>
-              Name:
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                required
-              />
-            </label>
-          </div>
-          <div>
-          <label>
-            Bio:
-            <textarea
-              name="bio"
-              value={formData.bio}
-              onChange={handleInputChange}
-              rows="3"
-            />
-          </label>
-        </div>
-
-        <button type="submit">Profil speichern</button>
-      </form>
+  return (
+    <div>
+      <h3>Benutzerprofile</h3>
+      {message && <p>{message}</p>}
+      <ul>
+        {profiles.map((profile) => (
+          <li key={profile.id}>
+            <strong>Name:</strong> {profile.name}<br />
+            <strong>Bio:</strong> {profile.bio}<br />
+            <strong>Geburtsdatum:</strong> {profile.birthdate}
+          </li>
+        ))}
+      </ul>
     </div>
-    );
-};
+  );
+}
 
 export default UserProfile;
