@@ -9,5 +9,6 @@
       "destination": "./docs",
       "recurse": true,
       "template": "templates/default"
-    }
+    },
+    "plugins": ["node_modules/jsdoc-route-plugin"]
   }

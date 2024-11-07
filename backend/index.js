@@ -93,7 +93,22 @@ app.get('/api/profile', authMiddleware, async (req, res) => {
     }
 });
 
-// Profil-Route (PUT)
+/**
+ * Updates the profile information of the authenticated user.
+ * 
+ * This endpoint allows a user to update their profile information, such as name, bio, 
+ * and birthdate. It first updates the user's `name` in the `users` table and then 
+ * inserts or updates the `bio` and `birthdate` in the `user_profile` table.
+ * 
+ * Path: `/api/profile` (PUT method)
+ * Access: Protected (requires authentication)
+ * 
+ * 
+ * 
+ * @returns {Object} JSON response with a success message or an error message
+ * 
+ * @throws {500} - Internal Server Error if an error occurs during the database update
+ */
 app.put('/api/profile', authMiddleware, async (req, res) => {
     const userId = req.user.id;
     const { name, bio, birthdate } = req.body;
@@ -115,6 +130,7 @@ app.put('/api/profile', authMiddleware, async (req, res) => {
         conn.release();
     }
 });
+
 
 
 // Server starten
